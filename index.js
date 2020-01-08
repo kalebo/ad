@@ -40,7 +40,10 @@ class AD {
     config.domain = String(config.user).split('@')[1];
 
     if (config.baseDN === undefined) {
-      config.baseDN = config.domain.split('.').map(n => `DC=${n}`).join(',');
+      config.baseDN = config.domain
+        .split('.')
+        .map(n => `DC=${n}`)
+        .join(',');
     }
 
     config = Object.assign(configFile, config);
@@ -84,7 +87,8 @@ class AD {
       password: config.pass,
       tlsOptions: {
         rejectUnauthorized: false
-      }
+      },
+      attributes: config.fields
     });
   }
 
