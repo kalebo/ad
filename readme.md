@@ -74,9 +74,18 @@ const AD = require('ad');
 // Your AD account should be a member
 // of the Administrators group.
 const ad = new AD({
-	url: "ldaps://127.0.0.1",
-	user: "dthree@acme.co",
-	pass: "howinsecure"
+	url: "ldaps://127.0.0.1", // mandatory
+	user: "dthree@acme.co",   // mandatory
+	pass: "howinsecure",      // mandatory
+	baseDN: "dc=ad",          // optional
+	fields: {                 // optional
+		user: [
+			'fields to include in response'
+		],
+		group: [
+			'fields to include in response'
+		]
+	}
 });
 
 ad.user().get().then(users => {
