@@ -38,7 +38,8 @@ module.exports = {
         email,
         title,
         phone,
-        location
+        location,
+        objectClass
       } = opts;
 
       let { passwordExpires, enabled } = opts;
@@ -57,12 +58,21 @@ module.exports = {
 
       location = parseLocation(location);
 
+      // Will use passed (if passed) objectClass if it in fact a correct type.
+      objectClass = ['user', this.config.defaults.userObjectClass].includes(
+        objectClass
+      )
+        ? objectClass
+        : this.config.defaults.userObjectClass;
+
       let valid =
         email && String(email).indexOf('@') === -1
           ? 'Invalid email address.'
           : !commonName
-            ? 'A commonName is required.'
-            : !userName ? 'A userName is required.' : true;
+          ? 'A commonName is required.'
+          : !userName
+          ? 'A userName is required.'
+          : true;
 
       if (valid !== true) {
         /* istanbul ignore next */
@@ -79,7 +89,7 @@ module.exports = {
         telephone: phone,
         userPrincipalName: `${userName}@${this.config.domain}`,
         sAMAccountName: userName,
-        objectClass: this.config.defaults.userObjectClass,
+        objectClass: objectClass,
         userPassword: ssha.create(pass)
       };
 

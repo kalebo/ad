@@ -165,6 +165,7 @@ Creates a new user. Returns the created user object.
 * `email`: String
 * `title`: String
 * `location`: String
+* `objectClass`: String
 
 If not specified, the first and last name will be based on the `commonName`.
 
