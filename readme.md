@@ -158,7 +158,7 @@ Creates a new user. Returns the created user object.
 ##### Options:
 
 * `userName`: String (required)
-* `pass`: String (required)
+* `password`: String (required)
 * `commonName`: String (required)
 * `firstName`: String
 * `lastName`: String
